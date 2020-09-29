@@ -2,7 +2,7 @@
  * The default luckysheet config object.
  */
 export default {
-    container: "luckysheet",  //ID of the container
+    container: "luckysheet",  //Container ID
     column: 60,  //Default number of columns for empty tables
     row: 84,  //Default row data amount for empty table
     allowCopy: true,  //Whether to allow copy
@@ -15,7 +15,7 @@ export default {
     pointEditZoom: 1,  //Scaling ratio during editor table editing
     // menu: "undo|redo|freezenrow|freezencolumn|download|share|chart|pivot",
     data: [{ "name": "Sheet1", color: "", "status": "1", "order": "0", "data": [], "config": {}, "index":0 }, { "name": "Sheet2", color: "", "status": "0", "order": "1", "data": [], "config": {}, "index":1  }, { "name": "Sheet3", color: "", "status": "0", "order": "2", "data": [], "config": {}, "index":2  }], //客户端sheet数据[shee1, sheet2, sheet3]
-    title: "Luckysheet", //The name of the table
+    title: "Luckysheet", //Table's name
     userInfo: '<i style="font-size:16px;color:#ff6a00;" class="fa fa-taxi" aria-hidden="true"></i> rabbit', //User information display style in the upper right corner
     userMenuItem: [{url:"", "icon":'<i class="fa fa-folder" aria-hidden="true"></i>', "name":"My form"}, {url:"www.baidu.com", "icon":'<i class="fa fa-sign-out" aria-hidden="true"></i>', "name":"sign out"}], //Click the pop-up menu of user information in the upper right corner
     myFolderUrl: "",  //The upper left corner <link to the back button
