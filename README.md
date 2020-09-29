@@ -25,7 +25,7 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 
 ## Documentation
 
- * Official documentation: https://mengshukeji.github.io/LuckysheetDocs/
+ * Official documentation: https://mengshukeji.github.io/LuckysheetDocs/guide/
  * YunoHost documentation: 
 
 ## YunoHost specific features

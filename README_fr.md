@@ -26,7 +26,7 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 ## Documentation
 
- * Documentation officielle : https://mengshukeji.github.io/LuckysheetDocs/
+ * Documentation officielle : https://mengshukeji.github.io/LuckysheetDocs/guide/
  * Documentation YunoHost : 
 
 ## Caractéristiques spécifiques YunoHost
