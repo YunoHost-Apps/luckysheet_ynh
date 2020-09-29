@@ -15,7 +15,7 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 ## Captures d'écran
 
-![]()
+![](https://raw.githubusercontent.com/mengshukeji/Luckysheet/master/docs/.vuepress/public/img/LuckysheetDemo.gif)
 
 ## Démo
 

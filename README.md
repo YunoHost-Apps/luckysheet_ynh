@@ -13,9 +13,9 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 
 **Shipped version:** 2.0.0
 
-## Screenshots
+## Screenshot
 
-![]()
+![](https://raw.githubusercontent.com/mengshukeji/Luckysheet/master/docs/.vuepress/public/img/LuckysheetDemo.gif)
 
 ## Demo
 
