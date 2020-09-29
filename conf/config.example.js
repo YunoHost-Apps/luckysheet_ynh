@@ -2,40 +2,40 @@
  * The default luckysheet config object.
  */
 export default {
-    container: "luckysheet", //容器的ID
-    column: 60, //空表格默认的列数量
-    row: 84, //空表格默认的行数据量
-    allowCopy: true, //是否允许拷贝
-    showtoolbar: true, //是否第二列显示工具栏
-    showinfobar: true, //是否显示顶部名称栏
-    showsheetbar: true, //是否显示底部表格名称区域
-    showstatisticBar: true, //是否显示底部计数栏
-    pointEdit: false, //是否是编辑器插入表格模式
-    pointEditUpdate: null, //编辑器表格更新函数
-    pointEditZoom: 1, //编辑器表格编辑时缩放比例
+    container: "luckysheet", //ID of the container
+    column: 60, //Default number of columns for empty tables
+    row: 84, //Default row data amount for empty table
+    allowCopy: true, //Whether to allow copy
+    showtoolbar: true, //Whether to display the toolbar in the second column
+    showinfobar: true, //Whether to show the top name bar
+    showsheetbar: true, //Whether to display the bottom table name area
+    showstatisticBar: true, //Whether to show the bottom count bar
+    pointEdit: false, //Whether it is the editor insert table mode
+    pointEditUpdate: null, //Editor table update function
+    pointEditZoom: 1, //Scaling ratio during editor table editing
     // menu: "undo|redo|freezenrow|freezencolumn|download|share|chart|pivot",
     data: [{ "name": "Sheet1", color: "", "status": "1", "order": "0", "data": [], "config": {}, "index":0 }, { "name": "Sheet2", color: "", "status": "0", "order": "1", "data": [], "config": {}, "index":1  }, { "name": "Sheet3", color: "", "status": "0", "order": "2", "data": [], "config": {}, "index":2  }], //客户端sheet数据[shee1, sheet2, sheet3]
-    title: "Luckysheet", //表格的名称
-    userInfo: '<i style="font-size:16px;color:#ff6a00;" class="fa fa-taxi" aria-hidden="true"></i> rabbit', //右上角的用户信息展示样式
-    userMenuItem: [{url:"", "icon":'<i class="fa fa-folder" aria-hidden="true"></i>', "name":"我的表格"}, {url:"www.baidu.com", "icon":'<i class="fa fa-sign-out" aria-hidden="true"></i>', "name":"退出登陆"}], //点击右上角的用户信息弹出的菜单
-    myFolderUrl: "", //左上角<返回按钮的链接
-    config: {}, //表格行高、列宽、合并单元格、公式等设置
-    fullscreenmode: true, //是否全屏模式，非全屏模式下，标记框不会强制选中。
-    devicePixelRatio: window.devicePixelRatio, //设备比例，比例越大表格分标率越高
-    allowEdit: true, //是否允许前台编辑
-    loadUrl: "", // 配置loadUrl的地址，luckysheet会通过ajax请求表格数据，默认载入status为1的sheet数据中的所有data，其余的sheet载入除data字段外的所有字段
-    loadSheetUrl: "", //配置loadSheetUrl的地址，参数为gridKey（表格主键） 和 index（sheet主键合集，格式为[1,2,3]），返回的数据为sheet的data字段数据集合
-    gridKey: "", // 表格唯一标识符
-    updateUrl: "", //表格数据的更新地址
-    updateImageUrl: "", //缩略图的更新地址
-    allowUpdate: false, //是否允许编辑后的后台更新
+    title: "Luckysheet", //The name of the table
+    userInfo: '<i style="font-size:16px;color:#ff6a00;" class="fa fa-taxi" aria-hidden="true"></i> rabbit', //User information display style in the upper right corner
+    userMenuItem: [{url:"", "icon":'<i class="fa fa-folder" aria-hidden="true"></i>', "name":"My form"}, {url:"www.baidu.com", "icon":'<i class="fa fa-sign-out" aria-hidden="true"></i>', "name":"sign out"}], //Click the pop-up menu of user information in the upper right corner
+    myFolderUrl: "", //The upper left corner <link to the back button
+    config: {}, //Table row height, column width, merged cells, formula and other settings
+    fullscreenmode: true, //Whether it is full-screen mode. In non-full-screen mode, the mark box will not be forced to be selected.
+    devicePixelRatio: window.devicePixelRatio, //Equipment ratio, the larger the ratio, the higher the sub-standard rate of the table
+    allowEdit: true, //Whether to allow front-end editing
+    loadUrl: "", // Configure the address of loadUrl. Luckysheet will request form data through Ajax. By default, all data in the sheet data with status 1 will be loaded, and the rest of the sheets will load all fields except the data field.
+    loadSheetUrl: "", //Configure the address of loadSheetUrl, the parameters are gridKey (table primary key) and index (sheet primary key collection, the format is [1,2,3]), the returned data is the sheet data field data collection
+    gridKey: "", // Table unique identifier
+    updateUrl: "", //Update address of table data
+    updateImageUrl: "", //Update address of thumbnail
+    allowUpdate: false, //Whether to allow background updates after editing
     functionButton: "", //右上角功能按钮，例如'<button id="" class="btn btn-primary" style="padding:3px 6px;font-size: 12px;margin-right: 10px;">下载</button>    <button id="" class="btn btn-primary btn-danger" style="    padding:3px 6px;    font-size: 12px;    margin-right: 10px;">分享</button>    <button id="luckysheet-share-btn-title" class="btn btn-primary btn-danger" style="    padding:3px 6px;    font-size: 12px;    margin-right: 10px;">秀数据</button>'
-    showConfigWindowResize: true, //图表和数据透视表的配置会在右侧弹出，设置弹出后表格是否会自动缩进
-    enableAddRow: true,//允许增加行
-    enableAddCol: true,//允许增加列
-    enablePage: false,//允许加载下一页
-    autoFormatw: false,  //自动格式化超过4位数的数字为 亿万格式 例：true or "true" or "TRUE"
-    accuracy: undefined,  //设置传输来的数值的精确位数，小数点后n位 传参数为数字或数字字符串，例： "0" 或 0
+    showConfigWindowResize: true, //The configuration of the chart and pivot table will pop up on the right side, set whether the table will automatically indent after popping up
+    enableAddRow: true,//Allow additional rows
+    enableAddCol: true,//Allow adding columns
+    enablePage: false,//Allow to load next page
+    autoFormatw: false,  //Automatically format numbers exceeding 4 digits into hundreds of millions of formats Example: true or "true" or "TRUE"
+    accuracy: undefined,  //Set the exact number of digits of the transmitted value, n digits after the decimal point. The parameter is a number or a string of numbers, for example: "0" or 0
     pageInfo:{
         'queryExps':'',
         'reportId':'',
@@ -46,10 +46,10 @@ export default {
         "totalPage":10,
         "pageUrl":"",
     },
-    editMode: false, //是否为编辑模式
-    chartConfigChange: null,//图表插件中图表更新触发的自定义方法
-    beforeCreateDom: null,//表格创建之前的方法
-    fireMousedown: null, //单元格数据下钻
+    editMode: false, //Is it in edit mode
+    chartConfigChange: null,//Custom method for triggering chart update in chart plugin
+    beforeCreateDom: null,//Method before table creation
+    fireMousedown: null, //Cell data drill down
     lang: 'en', //language
     plugins: [], //plugins, e.g. ['chart']
 }
