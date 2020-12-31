@@ -11,7 +11,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 ## Overview
 Luckysheet is an online spreadsheet that is powerful, simple to configure, and completely open source.
 
-**Shipped version:** 2.0.0
+**Shipped version:** 2.1.12
 
 ## Screenshot
 
