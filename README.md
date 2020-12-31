@@ -1,7 +1,7 @@
 # Luckysheet for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/hedgedoc.svg)](https://dash.yunohost.org/appci/app/hedgedoc) ![](https://ci-apps.yunohost.org/ci/badges/hedgedoc.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/hedgedoc.maintain.svg)  
-[![Install Luckysheet with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=hedgedoc)
+[![Integration level](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)  
+[![Install Luckysheet with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 
 *[Lire ce readme en français.](./README_fr.md)*
 
