@@ -1,7 +1,7 @@
 # Luckysheet pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/hedgedoc.svg)](https://dash.yunohost.org/appci/app/hedgedoc) ![](https://ci-apps.yunohost.org/ci/badges/hedgedoc.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/hedgedoc.maintain.svg)  
-[![Installer Luckysheet avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=hedgedoc)
+[![Niveau d'intégration](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)  
+[![Installer Luckysheet avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 
 *[Read this readme in english.](./README.md)* 
 
@@ -11,7 +11,7 @@ Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install
 ## Vue d'ensemble
 Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
 
-**Version incluse :** 2.0.0
+**Version incluse :** 2.1.12
 
 ## Captures d'écran
 

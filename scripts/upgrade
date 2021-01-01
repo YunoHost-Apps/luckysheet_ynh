@@ -32,7 +32,7 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up Luckysheet before upgrading (may take a while)..." --weight=120
+ynh_script_progression --message="Backing up Luckysheet before upgrading (may take a while)..." --weight=20
 
 # Backup the current version of the app
 ynh_backup_before_upgrade
@@ -58,7 +58,7 @@ ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	ynh_script_progression --message="Upgrading source files..." --weight=160
+	ynh_script_progression --message="Upgrading source files..." --weight=20
 	
 	# Remove the app directory securely
 	ynh_secure_remove --file=$final_path
@@ -98,7 +98,7 @@ ynh_system_user_create --username=$app
 #==============================================
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=160
+	ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
 
 	pushd "$final_path" || ynh_die
 
@@ -124,17 +124,17 @@ ynh_add_systemd_config
 #=================================================
 # SECURE FILES AND DIRECTORIES
 #=================================================
-ynh_script_progression --message="Securing files and directories..."
+ynh_script_progression --message="Securing files and directories..." --weight=1
 
 # Set permissions on app files
-chown -R $app:$app $final_path
+chown -R $app: $final_path
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..."
 
-yunohost service add $app --description "Collaborative Markdown notes" --log="/var/log/$app/$app.log"
+yunohost service add $app --description="Online spreadsheet like excel" --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
