@@ -11,7 +11,7 @@ Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install
 ## Vue d'ensemble
 Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
 
-**Version incluse :** 2.1.13
+**Version incluse :** 2.0.0
 
 ## Captures d'écran
 
@@ -38,8 +38,8 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 #### Architectures supportées
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/luckysheet%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/luckysheet%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/luckysheet/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/luckysheet.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/luckysheet.svg)](https://ci-apps-arm.yunohost.org/ci/apps/luckysheet/)
 
 ## Liens
 

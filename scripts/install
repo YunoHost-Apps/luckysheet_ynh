@@ -47,7 +47,6 @@ ynh_script_progression --message="Storing installation settings..." --weight=2
 
 ynh_app_setting_set --app=$app --key=domain    --value=$domain
 ynh_app_setting_set --app=$app --key=path      --value=$path_url
-ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -119,8 +118,8 @@ cp ../conf/config.example.js $final_path/src/config.js
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
-ynh_replace_string --match_string="__ENV_PATH__"  --replace_string="$PATH"    --target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__YNH_NPM__"   --replace_string="$ynh_npm" --target_file="../conf/systemd.service"
+ynh_replace_string --match_string="__ENV_PATH__" --replace_string="$PATH"    --target_file="../conf/systemd.service"
+ynh_replace_string --match_string="__YNH_NPM__"  --replace_string="$ynh_npm" --target_file="../conf/systemd.service"
 
 ynh_add_systemd_config
 
@@ -147,17 +146,17 @@ yunohost service add $app --description="Online spreadsheet like excel" --log="/
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="Serving files from: dist"
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd --line_match="Serving files from: dist"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring SSOwat..." --weight=1
+ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary or protect it
 if [ $is_public -eq 1 ]
 then
-	ynh_permission_update --permission "main" --add "visitors"
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================

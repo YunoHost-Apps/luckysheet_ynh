@@ -18,7 +18,6 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
-is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 port=$(ynh_app_setting_get --app=$app --key=port)
 
@@ -28,6 +27,18 @@ port=$(ynh_app_setting_get --app=$app --key=port)
 ynh_script_progression --message="Checking version..."
 
 upgrade_type=$(ynh_check_app_version_changed)
+
+#=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
 
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
@@ -50,7 +61,7 @@ ynh_abort_if_errors
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="systemd"
+ynh_systemd_action --service_name=$app --action=stop --log_path=systemd
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -141,7 +152,7 @@ yunohost service add $app --description="Online spreadsheet like excel" --log="/
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="systemd" --line_match="Serving files from: dist"
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd --line_match="Serving files from: dist"
 
 #=================================================
 # RELOAD NGINX
