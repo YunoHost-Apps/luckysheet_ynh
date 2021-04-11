@@ -37,8 +37,8 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 
 #### Supported architectures
 
-* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/luckysheet%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/)
-* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/luckysheet%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/luckysheet/)
+* x86-64 - [![Build Status](https://ci-apps.yunohost.org/ci/logs/luckysheet.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/luckysheet.svg)](https://ci-apps-arm.yunohost.org/ci/apps/luckysheet/)
 
 ## Links
 
