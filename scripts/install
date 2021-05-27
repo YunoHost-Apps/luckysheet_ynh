@@ -45,8 +45,8 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain    --value=$domain
-ynh_app_setting_set --app=$app --key=path      --value=$path_url
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -112,8 +112,12 @@ popd || ynh_die
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
-cp ../conf/config.example.js $final_path/src/config.js
+ynh_add_config --template="../conf/config.example.js" --destination="$final_path/src/config.js"
+
+chmod 400 "$final_path/src/config.js"
+chown $app:$app "$final_path/src/config.js"
 
 #=================================================
 # SETUP SYSTEMD
@@ -138,7 +142,7 @@ yunohost service add $app --description="Online spreadsheet like excel" --log="/
 ynh_script_progression --message="Starting a systemd service..." --weight=2
 
 # Start a systemd service
-ynh_systemd_action --service_name=$app --action=start --log_path=systemd --line_match="Serving files from: dist"
+ynh_systemd_action --service_name=$app --action=start --log_path=systemd #--line_match="Serving files from: dist"
 
 #=================================================
 # SETUP SSOWAT

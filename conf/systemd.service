@@ -12,8 +12,8 @@ Environment="PATH=__ENV_PATH__"
 Environment="NODE_ENV=production"
 ExecStart=__YNH_NPM__ run build
 Restart=always
-PrivateTmp=true
-PrivateDevices=true
+#PrivateTmp=true
+#PrivateDevices=true
 
 [Install]
 WantedBy=multi-user.target
