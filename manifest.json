@@ -3,8 +3,8 @@
     "id": "luckysheet",
     "packaging_format": 1,
     "description": {
-        "en": "Online spreadsheet that is powerful, simple to configure, and completely open source.",
-        "fr": "Feuille de calcul en ligne, puissante, simple à configurer et entièrement open source."
+        "en": "Online spreadsheet that is powerful, simple to configure",
+        "fr": "Feuille de calcul en ligne, puissante, simple à configurer"
     },
     "version": "2.0.0~ynh3",
     "url": "https://github.com/mengshukeji/Luckysheet",
@@ -13,7 +13,7 @@
         "name": "eric_G"
     },
     "requirements": {
-        "yunohost": ">= 4.1.7"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": false,
     "services": [
@@ -23,8 +23,7 @@
         "install" : [
             {
                 "name": "domain",
-                "type": "domain",
-                "example": "domain.org"
+                "type": "domain"
             },
             {
                 "name": "path",

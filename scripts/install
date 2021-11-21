@@ -99,11 +99,11 @@ ynh_add_nginx_config
 #==============================================
 ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
 
-pushd "$final_path" || ynh_die
+pushd "$final_path"
 	ynh_use_nodejs
-	ynh_exec_warn_less ynh_npm install
-	ynh_exec_warn_less ynh_npm install gulp -g
-popd || ynh_die
+	ynh_exec_warn_less $ynh_npm install
+	ynh_exec_warn_less $ynh_npm install gulp -g
+popd
 
 #=================================================
 # MODIFY A CONFIG FILE
