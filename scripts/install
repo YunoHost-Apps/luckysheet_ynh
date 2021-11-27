@@ -102,8 +102,8 @@ ynh_script_progression --message="Building Luckysheet... (this will take some ti
 pushd "$final_path" || ynh_die
 
 	ynh_use_nodejs
-	ynh_exec_warn_less ynh_npm install
-	ynh_exec_warn_less ynh_npm install gulp -g
+	ynh_exec_warn_less $ynh_npm install
+	ynh_exec_warn_less $ynh_npm install gulp -g
 
 popd || ynh_die
 
