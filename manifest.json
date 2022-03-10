@@ -8,6 +8,13 @@
     },
     "version": "2.0.0~ynh4",
     "url": "https://github.com/mengshukeji/Luckysheet",
+    "upstream": {
+        "license": "MIT",
+        "website": "https://github.com/mengshukeji/Luckysheet",
+        "demo": "https://mengshukeji.github.io/LuckysheetDemo/",
+        "admindoc": "https://mengshukeji.github.io/LuckysheetDocs/guide/",
+        "code": "https://github.com/mengshukeji/Luckysheet"
+    },
     "license": "MIT",
     "maintainer": {
         "name": "eric_G"
@@ -20,7 +27,7 @@
         "nginx"
     ],
     "arguments": {
-        "install" : [
+        "install": [
             {
                 "name": "domain",
                 "type": "domain"
