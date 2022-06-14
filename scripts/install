@@ -14,7 +14,8 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	ynh_clean_check_starting
+	### Remove this function if there's nothing to clean before calling the remove script.
+	true
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -45,8 +46,8 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain    --value=$domain
-ynh_app_setting_set --app=$app --key=path      --value=$path_url
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -84,6 +85,10 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir=$final_path
 
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
+
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
@@ -99,37 +104,28 @@ ynh_add_nginx_config
 #==============================================
 ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
 
-pushd "$final_path"
+pushd $final_path
 	ynh_use_nodejs
-	ynh_exec_warn_less $ynh_npm install
-	ynh_exec_warn_less $ynh_npm install gulp -g
+	npm install 
+	npm install gulp --location=global
 popd
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
-cp ../conf/config.example.js $final_path/src/config.js
+ynh_add_config --template="../conf/config.example.js" --destination="$final_path/src/config.js"
+
+chmod 400 "$final_path/src/config.js"
+chown $app:$app "$final_path/src/config.js"
 
 #=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
-ynh_replace_string --match_string="__ENV_PATH__" --replace_string="$PATH" --target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__YNH_NPM__" --replace_string="$ynh_npm" --target_file="../conf/systemd.service"
-
 ynh_add_systemd_config
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Securing files and directories..." --weight=1
-
-# Set permissions to app files
-chown -R $app: $final_path
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
