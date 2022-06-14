@@ -98,19 +98,6 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 ynh_add_nginx_config
 
 #=================================================
-# SPECIFIC SETUP
-#==============================================
-# INSTALL HEDGEDOC
-#==============================================
-ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
-
-pushd $final_path
-	ynh_use_nodejs
-	npm install 
-	npm install gulp --location=global
-popd
-
-#=================================================
 # MODIFY A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
@@ -119,6 +106,20 @@ ynh_add_config --template="../conf/config.example.js" --destination="$final_path
 
 chmod 400 "$final_path/src/config.js"
 chown $app:$app "$final_path/src/config.js"
+
+#=================================================
+# SPECIFIC SETUP
+#==============================================
+# INSTALL HEDGEDOC
+#==============================================
+ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
+
+pushd $final_path
+	ynh_use_nodejs
+	npm install npm@latest --location=global
+	ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install
+	ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install gulp --location=global
+popd
 
 #=================================================
 # SETUP SYSTEMD
