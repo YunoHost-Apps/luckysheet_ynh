@@ -116,9 +116,9 @@ ynh_script_progression --message="Building Luckysheet... (this will take some ti
 
 pushd $final_path
 	ynh_use_nodejs
-	npm install npm@latest --location=global
-	ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install
-	ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install gulp --location=global
+	ynh_exec_warn_less npm install npm@latest --location=global
+	ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install
+	ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH $ynh_npm install gulp --location=global
 popd
 
 #=================================================
