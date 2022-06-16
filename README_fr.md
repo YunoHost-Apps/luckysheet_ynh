@@ -11,7 +11,7 @@ Si vous n'avez pas YunoHost, consultez [le guide](https://yunohost.org/#/install
 ## Vue d'ensemble
 Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
 
-**Version incluse :** 2.0.0
+**Version incluse :** 2.1.13
 
 ## Captures d'écran
 

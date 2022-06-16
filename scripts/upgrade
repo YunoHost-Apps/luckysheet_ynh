@@ -19,7 +19,6 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-port=$(ynh_app_setting_get --app=$app --key=port)
 
 #=================================================
 # CHECK VERSION
@@ -46,13 +45,6 @@ ynh_abort_if_errors
 #=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
-# STOP SYSTEMD SERVICE
-#=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
-
-ynh_systemd_action --service_name=$app --action="stop" --log_path=systemd
-
-#=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
@@ -63,6 +55,17 @@ if ynh_legacy_permissions_exists; then
 
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
+
+# Remove the service from the list of services known by YunoHost (added from `yunohost service add`)
+if ynh_exec_warn_less yunohost service status $app >/dev/null
+then
+	ynh_script_progression --message="Removing $app service integration..." --weight=1
+	yunohost service remove $app
+fi
+
+ynh_app_setting_delete --app=$app --key=port
+
+ynh_remove_systemd_config
 
 #=================================================
 # CREATE DEDICATED USER
@@ -81,7 +84,7 @@ then
 	ynh_script_progression --message="Upgrading source files..." --weight=20
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path" --keep="src/config.js"
+	ynh_setup_source --dest_dir="$final_path/build"
 fi
 
 #=================================================
@@ -109,37 +112,35 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Building app... (this will take some time and resources!)" --weight=20
 
-	pushd "$final_path"
+	pushd "$final_path/build"
 		ynh_use_nodejs
 		ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm install
 		ynh_npm install gulp -g
+		ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm run build
 	popd
+	tmpdir="$(mktemp -d)"
+	ynh_exec_as $app cp -af "$final_path/live/config.js" "$tmpdir/config.js"
+	ynh_secure_remove --file="$final_path/live"
+	ynh_exec_as $app mv "$final_path/build/dist" "$final_path/live"
+	ynh_exec_as $app cp -af "$tmpdir/config.js" "$final_path/live/config.js"
 fi
 
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --weight=2
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
-# Create a dedicated systemd config
-ynh_add_systemd_config
+#=================================================
+# UPDATE A CONFIG FILE
+#=================================================
+ynh_script_progression --message="Updating a configuration file..."
+
+ynh_add_config --template="../conf/config.example.js" --destination="$final_path/live/config.js"
+
+chmod 400 "$final_path/live/config.js"
+chown $app:$app "$final_path/live/config.js"
 
 #=================================================
 # GENERIC FINALIZATION
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..."
-
-yunohost service add $app --description="Online spreadsheet like excel" --log="/var/log/$app/$app.log"
-
-#=================================================
-# START SYSTEMD SERVICE
-#=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
-
-ynh_systemd_action --service_name=$app --action=start --log_path=systemd --line_match="Serving files from: dist"
-
 #=================================================
 # RELOAD NGINX
 #=================================================
