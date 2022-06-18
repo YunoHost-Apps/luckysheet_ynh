@@ -1,1 +1,1 @@
-Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
+Luckysheet est une feuille de calcul en ligne, puissante, simple Ã  configurer et complÃ¨tement open source.
