@@ -123,10 +123,11 @@ then
 		ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm run build
 	popd
 	tmpdir="$(mktemp -d)"
-	ynh_exec_as $app cp -af "$final_path/live/config.js" "$tmpdir/config.js"
+	cp -af "$final_path/live/config.js" "$tmpdir/config.js"
 	ynh_secure_remove --file="$final_path/live"
-	ynh_exec_as $app mv "$final_path/build/dist" "$final_path/live"
-	ynh_exec_as $app cp -af "$tmpdir/config.js" "$final_path/live/config.js"
+	mv "$final_path/build/dist" "$final_path/live"
+	cp -af "$tmpdir/config.js" "$final_path/live/config.js"
+	ynh_secure_remove --file="$tmpdir"
 fi
 
 chmod 750 "$final_path"
