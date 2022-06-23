@@ -67,6 +67,11 @@ ynh_app_setting_delete --app=$app --key=port
 
 ynh_remove_systemd_config
 
+if [[ -d "$final_path/src/" ]]
+then
+    mv $final_path/src/ $final_path/live/
+fi
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
