@@ -45,20 +45,11 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 ynh_script_progression --message="Storing installation settings..." --weight=2
 
-ynh_app_setting_set --app=$app --key=domain    --value=$domain
-ynh_app_setting_set --app=$app --key=path      --value=$path_url
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 
 #=================================================
 # STANDARD MODIFICATIONS
-#=================================================
-# FIND AND OPEN A PORT
-#=================================================
-ynh_script_progression --message="Finding an available port..." --weight=2
-
-# Find an available port
-port=$(ynh_find_port --port=3000)
-ynh_app_setting_set --app=$app --key=port --value=$port
-
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
@@ -68,13 +59,25 @@ ynh_script_progression --message="Installing dependencies..." --weight=20
 ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
 
 #=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_script_progression --message="Configuring system user..." --weight=3
+
+# Create a system user
+ynh_system_user_create --username=$app --home_dir="$final_path"
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=2
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir=$final_path
+ynh_setup_source --dest_dir="$final_path/build"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # NGINX CONFIGURATION
@@ -85,77 +88,49 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 ynh_add_nginx_config
 
 #=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Configuring system user..." --weight=3
-
-# Create a system user
-ynh_system_user_create --username=$app --home_dir=$final_path
-
-#=================================================
 # SPECIFIC SETUP
-#==============================================
-# INSTALL HEDGEDOC
-#==============================================
-ynh_script_progression --message="Building Luckysheet... (this will take some time and resources!)" --weight=20
+#=================================================
+# BUILD APP
+#=================================================
+ynh_script_progression --message="Building app... (this will take some time and resources!)" --weight=20
 
-pushd "$final_path" || ynh_die
-
+pushd "$final_path/build"
 	ynh_use_nodejs
-	ynh_exec_warn_less $ynh_npm install
-	ynh_exec_warn_less $ynh_npm install gulp -g
+	ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm install
+	ynh_npm install gulp -g
+	ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm run build
+popd
 
-popd || ynh_die
+ynh_exec_as $app mv "$final_path/build/dist" "$final_path/live"
+
+ynh_secure_remove --file="$final_path/build"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
-# MODIFY A CONFIG FILE
+# ADD A CONFIGURATION
 #=================================================
+ynh_script_progression --message="Adding a configuration file..."
 
-cp ../conf/config.example.js $final_path/src/config.js
+ynh_add_config --template="../conf/config.example.js" --destination="$final_path/live/config.js"
 
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
-
-ynh_replace_string --match_string="__ENV_PATH__" --replace_string="$PATH"    --target_file="../conf/systemd.service"
-ynh_replace_string --match_string="__YNH_NPM__"  --replace_string="$ynh_npm" --target_file="../conf/systemd.service"
-
-ynh_add_systemd_config
+chmod 400 "$final_path/live/config.js"
+chown $app:$app "$final_path/live/config.js"
 
 #=================================================
 # GENERIC FINALIZATION
-#=================================================
-# SECURE FILES AND DIRECTORIES
-#=================================================
-ynh_script_progression --message="Securing files and directories..." --weight=1
-
-# Set permissions to app files
-chown -R $app: $final_path
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
-
-yunohost service add $app --description="Online spreadsheet like excel" --log="/var/log/$app/$app.log"
-
-#=================================================
-# START SYSTEMD SERVICE
-#=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=2
-
-# Start a systemd service
-ynh_systemd_action --service_name=$app --action=start --log_path=systemd --line_match="Serving files from: dist"
-
 #=================================================
 # SETUP SSOWAT
 #=================================================
 ynh_script_progression --message="Configuring permissions..." --weight=1
 
-# Make app public if necessary or protect it
+# Make app public if necessary
 if [ $is_public -eq 1 ]
 then
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
 	ynh_permission_update --permission="main" --add="visitors"
 fi
 
@@ -170,4 +145,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of Luckysheet completed" --last
+ynh_script_progression --message="Installation of $app completed" --last
