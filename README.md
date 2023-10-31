@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Luckysheet for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Working status](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Working status](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
+
 [![Install Luckysheet with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -31,7 +32,7 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 * Official app website: <https://github.com/mengshukeji/Luckysheet>
 * Official admin documentation: <https://mengshukeji.github.io/LuckysheetDocs/guide/>
 * Upstream app code repository: <https://github.com/mengshukeji/Luckysheet>
-* YunoHost documentation for this app: <https://yunohost.org/app_luckysheet>
+* YunoHost Store: <https://apps.yunohost.org/app/luckysheet>
 * Report a bug: <https://github.com/YunoHost-Apps/luckysheet_ynh/issues>
 
 ## Developer info

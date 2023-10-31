@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Luckysheet pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
+
 [![Installer Luckysheet avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Luckysheet rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Luckysheet rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
 
@@ -22,16 +23,16 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 **Démo :** https://mengshukeji.github.io/LuckysheetDemo/
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Luckysheet](./doc/screenshots/screenshot.gif)
+![Capture d’écran de Luckysheet](./doc/screenshots/screenshot.gif)
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://github.com/mengshukeji/Luckysheet>
-* Documentation officielle de l'admin : <https://mengshukeji.github.io/LuckysheetDocs/guide/>
-* Dépôt de code officiel de l'app : <https://github.com/mengshukeji/Luckysheet>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_luckysheet>
+* Site officiel de l’app : <https://github.com/mengshukeji/Luckysheet>
+* Documentation officielle de l’admin : <https://mengshukeji.github.io/LuckysheetDocs/guide/>
+* Dépôt de code officiel de l’app : <https://github.com/mengshukeji/Luckysheet>
+* YunoHost Store: <https://apps.yunohost.org/app/luckysheet>
 * Signaler un bug : <https://github.com/YunoHost-Apps/luckysheet_ynh/issues>
 
 ## Informations pour les développeurs
@@ -46,4 +47,4 @@ ou
 sudo yunohost app upgrade luckysheet -u https://github.com/YunoHost-Apps/luckysheet_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
