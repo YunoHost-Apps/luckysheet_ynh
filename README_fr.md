@@ -21,7 +21,7 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 **Version incluse :** 2.1.13~ynh1
 
-**Démo :** https://mengshukeji.github.io/LuckysheetDemo/
+**Démo :** https://mengshukeji.gitee.io/luckysheetdemo/
 
 ## Captures d’écran
 

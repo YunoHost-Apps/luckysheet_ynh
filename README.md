@@ -21,7 +21,7 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 
 **Shipped version:** 2.1.13~ynh1
 
-**Demo:** https://mengshukeji.github.io/LuckysheetDemo/
+**Demo:** https://mengshukeji.gitee.io/luckysheetdemo/
 
 ## Screenshots
 
