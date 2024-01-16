@@ -10,37 +10,12 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# LOAD SETTINGS
+# INSTALL NODEJS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=2
+ynh_script_progression --message="Installing NodeJS..." --weight=20
 
-app=$YNH_APP_INSTANCE_NAME
-
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-
-#=================================================
-# CHECK VERSION
-#=================================================
-ynh_script_progression --message="Checking version..."
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
-# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
-#=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=20
-
-# Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
-	ynh_clean_check_starting
-	# Restore it if the upgrade fails
-	ynh_restore_upgradebackup
-}
-# Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+# Install Nodejs
+ynh_install_nodejs --nodejs_version="$nodejs_version"
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -49,114 +24,71 @@ ynh_abort_if_errors
 #=================================================
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
-# Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
-
-	ynh_app_setting_delete --app=$app --key=is_public
-fi
-
 # Remove the service from the list of services known by YunoHost (added from `yunohost service add`)
-if ynh_exec_warn_less yunohost service status $app >/dev/null
-then
-	ynh_script_progression --message="Removing $app service integration..." --weight=1
-	yunohost service remove $app
+if ynh_exec_warn_less yunohost service status $app >/dev/null; then
+    ynh_script_progression --message="Removing $app service integration..." --weight=1
+    yunohost service remove "$app"
 fi
 
-ynh_app_setting_delete --app=$app --key=port
-
+ynh_app_setting_delete --app="$app" --key=port
 ynh_remove_systemd_config
 
-if [[ -d "$final_path/src/" ]]
-then
-    mv $final_path/src/ $final_path/live/
+if [[ -d "$install_dir/src/" ]]; then
+    mv "$install_dir/src" "$install_dir/live"
 fi
-
-#=================================================
-# CREATE DEDICATED USER
-#=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
-
-# Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Upgrading source files..." --weight=20
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrading source files..." --weight=20
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source --dest_dir="$install_dir/source"
 
-	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path/build"
-fi
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
-
-#=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=18
-
-# Install Nodejs
-ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-
-#=================================================
-# SPECIFIC UPGRADE
 #=================================================
 # BUILD APP
 #=================================================
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Building app... (this will take some time and resources!)" --weight=20
+ynh_script_progression --message="Building app... (this will take some time and resources!)" --weight=20
 
-	pushd "$final_path/build"
-		ynh_use_nodejs
-		ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm install
-		ynh_npm install gulp -g
-		ynh_exec_warn_less ynh_exec_as $app $ynh_node_load_PATH $ynh_npm run build
-	popd
-	tmpdir="$(mktemp -d)"
-	cp -af "$final_path/live/config.js" "$tmpdir/config.js"
-	ynh_secure_remove --file="$final_path/live"
-	mv "$final_path/build/dist" "$final_path/live"
-	cp -af "$tmpdir/config.js" "$final_path/live/config.js"
-	ynh_secure_remove --file="$tmpdir"
-fi
+pushd "$install_dir/build"
+    ynh_use_nodejs
+    ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install
+    ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" install gulp -g
+    ynh_exec_warn_less ynh_exec_as "$app" "$ynh_node_load_PATH" "$ynh_npm" run build
+popd
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+mv "$install_dir/live/config.js" "$install_dir/config.js"
+
+ynh_secure_remove --file="$install_dir/live"
+ynh_exec_as "$app" mv "$install_dir/source/dist" "$install_dir/live"
+
+mv "$install_dir/config.js" "$install_dir/live/config.js"
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression --message="Updating a configuration file..."
 
-ynh_add_config --template="../conf/config.example.js" --destination="$final_path/live/config.js"
+ynh_add_config --template="config.example.js" --destination="$install_dir/live/config.js"
 
-chmod 400 "$final_path/live/config.js"
-chown $app:$app "$final_path/live/config.js"
+chmod 400 "$install_dir/live/config.js"
+chown "$app:$app" "$install_dir/live/config.js"
 
 #=================================================
-# GENERIC FINALIZATION
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-# RELOAD NGINX
-#=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
 
-ynh_systemd_action --service_name=nginx --action=reload
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
 #=================================================
 # END OF SCRIPT
