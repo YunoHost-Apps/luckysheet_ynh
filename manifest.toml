@@ -7,7 +7,7 @@ name = "Luckysheet"
 description.en = "Online spreadsheet that is powerful, simple to configure"
 description.fr = "Feuille de calcul en ligne, puissante, simple à configurer"
 
-version = "2.1.13~ynh1"
+version = "2.1.13~ynh2"
 
 maintainers = ["eric_G"]
 
@@ -20,7 +20,7 @@ code = "https://github.com/mengshukeji/Luckysheet"
 fund = "https://opencollective.com/luckysheet"
 
 [integration]
-yunohost = ">= 4.3.0"
+yunohost = ">= 11.2"
 architectures = "all"
 multi_instance = false
 ldap = false
