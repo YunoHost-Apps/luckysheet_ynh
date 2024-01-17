@@ -19,9 +19,9 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Luckysheet is an online spreadsheet that is powerful, simple to configure, and completely open source.
 
 
-**Shipped version:** 2.1.13~ynh1
+**Shipped version:** 2.1.13~ynh2
 
-**Demo:** https://mengshukeji.gitee.io/luckysheetdemo/
+**Demo:** https://dream-num.github.io/LuckysheetDemo
 
 ## Screenshots
 
@@ -29,8 +29,8 @@ Luckysheet is an online spreadsheet that is powerful, simple to configure, and c
 
 ## Documentation and resources
 
-* Official app website: <https://github.com/mengshukeji/Luckysheet>
-* Official admin documentation: <https://mengshukeji.github.io/LuckysheetDocs/guide/>
+* Official app website: <https://dream-num.github.io/LuckysheetDocs/>
+* Official admin documentation: <https://dream-num.github.io/LuckysheetDocs/guide/>
 * Upstream app code repository: <https://github.com/mengshukeji/Luckysheet>
 * YunoHost Store: <https://apps.yunohost.org/app/luckysheet>
 * Report a bug: <https://github.com/YunoHost-Apps/luckysheet_ynh/issues>
