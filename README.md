@@ -19,7 +19,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Luckysheet is an online spreadsheet that is powerful, simple to configure, and completely open source.
 
 
-**Shipped version:** 2.1.13~ynh1
+**Shipped version:** 2.1.13~ynh2
 
 **Demo:** https://dream-num.github.io/LuckysheetDemo
 

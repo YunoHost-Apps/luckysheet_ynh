@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer et complètement open source.
 
 
-**Version incluse :** 2.1.13~ynh1
+**Version incluse :** 2.1.13~ynh2
 
 **Démo :** https://dream-num.github.io/LuckysheetDemo
 
