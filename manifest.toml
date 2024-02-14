@@ -9,7 +9,7 @@ description.fr = "Feuille de calcul en ligne, puissante, simple à configurer"
 
 version = "2.1.13~ynh2"
 
-maintainers = ["eric_G"]
+maintainers = []
 
 [upstream]
 license = "MIT"
