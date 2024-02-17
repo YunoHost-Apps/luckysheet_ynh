@@ -7,7 +7,7 @@ name = "Luckysheet"
 description.en = "Online spreadsheet that is powerful, simple to configure"
 description.fr = "Feuille de calcul en ligne, puissante, simple à configurer"
 
-version = "2.1.13~ynh2"
+version = "v2.1.13~ynh1"
 
 maintainers = []
 
@@ -45,7 +45,7 @@ ram.runtime = "500M"
 
 [resources]
     [resources.sources.main]
-    url = "https://github.com/mengshukeji/Luckysheet/archive/v2.1.13.tar.gz"
+    url = "https://github.com/mengshukeji/Luckysheet/archive/refs/tags/v2.1.13.tar.gz"
     sha256 = "9c996e1e2a47ca0bb37b17840f7ded82ed999899daf3bd620b07c154b71647f9"
 
     autoupdate.strategy = "latest_github_tag"
