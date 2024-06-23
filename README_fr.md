@@ -27,6 +27,10 @@ Luckysheet est une feuille de calcul en ligne, puissante, simple à configurer e
 
 ![Capture d’écran de Luckysheet](./doc/screenshots/screenshot.gif)
 
+## :red_circle: Anti-fonctionnalités
+
+- **Application non maintenue **: Ce logiciel n'est plus maintenu. Attendez-vous à ce qu'il ne fonctionne plus avec le temps, et que l'on découvre des failles de sécurité qui ne seront pas corrigées, etc.
+
 ## Documentations et ressources
 
 - Site officiel de l’app : <https://dream-num.github.io/LuckysheetDocs/>
