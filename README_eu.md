@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Luckysheet YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/luckysheet.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
 
 [![Instalatu Luckysheet YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 

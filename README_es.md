@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # Luckysheet para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/luckysheet.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
 
 [![Instalar Luckysheet con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 

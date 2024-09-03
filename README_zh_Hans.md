@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Luckysheet
 
-[![集成程度](https://dash.yunohost.org/integration/luckysheet.svg)](https://dash.yunohost.org/appci/app/luckysheet) ![工作状态](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/luckysheet.svg)](https://ci-apps.yunohost.org/ci/apps/luckysheet/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/luckysheet.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/luckysheet.maintain.svg)
 
 [![使用 YunoHost 安装 Luckysheet](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=luckysheet)
 
